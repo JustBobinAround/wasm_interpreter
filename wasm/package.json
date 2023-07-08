@@ -1,0 +1,17 @@
+{
+  "name": "wasm_ligma_interpreter",
+  "collaborators": [
+    "justbobinaround <roberthenryjunkins@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "wasm_ligma_interpreter_bg.wasm",
+    "wasm_ligma_interpreter.js",
+    "wasm_ligma_interpreter.d.ts"
+  ],
+  "module": "wasm_ligma_interpreter.js",
+  "types": "wasm_ligma_interpreter.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

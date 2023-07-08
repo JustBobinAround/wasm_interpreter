@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+   <title>L I G M A -- Interpreter -- WASM</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div id="container">
+      <div id="input-container">
+      <textarea id="input" rows="4" cols="50">
+!"Hello, world!";
+a = 100;
+$a{
+    a = a - 1;
+    d = a;
+    
+    b = a % 3;
+    b = b == 0;
+    ?b{
+        d = "fizz";
+    }    
+
+    b = a % 5;
+    b = b == 0;
+    ?b{
+        d = "buzz";
+    }
+    
+    b = a % 5;
+    b = b == 0;
+    c = a % 3;
+    c = c == 0;
+    b = c & b;
+    ?b{
+        d = "fizzbuzz";
+    }
+
+    d = "" + d + "\n";
+    !d;
+}
+      </textarea>
+      <button id="submit">Run</button>
+      </div>
+      <pre id="console-container">
+      <pre id="console"></pre>
+      </pre>
+   </div>
+   <script type="module">
+      import init, { ligma } from "./wasm/wasm_ligma_interpreter.js";
+      const inputTextArea = document.getElementById('input');
+      const submitButton = document.getElementById('submit');
+      const consoleOutput = document.getElementById('console');
+
+      submitButton.addEventListener('click', function() {
+          const inputText = inputTextArea.value;
+          printToConsole(inputText);
+      });
+
+      function printToConsole(text) {
+          init().then(() => {
+              let interp = ligma(text);
+              consoleOutput.textContent = interp;
+              consoleOutput.scrollTop = consoleOutput.scrollHeight; // Auto-scroll to the bottom
+          });
+      }
+   </script>
+</body>
+</html>
+
